@@ -1,0 +1,6 @@
+## @section Global parameters
+## Please, note that this will override the parameters, including dependencies, configured to use the global value
+##
+
+store:
+  image: "public.ecr.aws/g4a0y2u8/unifie-store:staging-19925"

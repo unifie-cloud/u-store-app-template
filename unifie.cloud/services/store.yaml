@@ -1,0 +1,34 @@
+name: store
+uiType: helm
+helmRepositoryName: unifie-store
+helmRepositoryChartName: unifie-store
+rules:
+  - varName: store
+    varValueType: object
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: '{"image":"public.ecr.aws/g4a0y2u8/unifie-store:staging-19925"}'
+    refToSpecVar: ""
+    UIVarTitle: store
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: store.image
+    varValueType: string
+    varValueSrcType: src_deployment_var
+    hardcodedDefaultValue: ""
+    refToSpecVar: image.unifie-store
+    UIVarTitle: store.image
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+routes:
+  - host: "{{ .deployment.domain }}"
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: store
+              port:
+                number: 4002

@@ -1,0 +1,108 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: "{{ .Release.Namespace }}"
+  name: ustore-configs
+data:
+  schema.json: |
+    {
+      "schema": {
+        "properties": [
+          {
+            "type": "boolean",
+            "label": "unifie-app-enabled",
+            "name": "isEnabled"
+          },
+        ]
+      }
+    }
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: "{{ .Release.Namespace }}"
+  name: store
+  labels:
+    app-type: store
+    app.kubernetes.io/name: store
+spec:
+  selector:
+    matchLabels:
+      app-type: store
+      app.kubernetes.io/name: store
+  template:
+    metadata:
+      labels:
+        app-type: store
+        app.kubernetes.io/name: store
+    spec:
+      volumes:
+        - name: ustore-configs
+          configMap:
+            name: ustore-configs
+      containers:
+        - name: back
+          image: "{{ .Values.store.image }}"
+          volumeMounts:
+            - name: ustore-configs
+              mountPath: /unifie-config-maps
+          resources:
+            requests:
+              memory: 100Mi
+              cpu: 50m
+          ports:
+            - containerPort: 4002
+          env:
+            - name: GROUP_PREFIX
+              value: "unifie-"
+            - name: HIDE_LANDING_PAGE
+              value: "true"
+            - name: CONFIRM_EMAIL
+              value: "false"
+            - name: DISABLE_NON_BUSINESS_EMAIL_SIGNUP
+              value: "false"
+            - name: NEXT_PUBLIC_TERMS_URL
+              value: "/terms"
+            - name: NEXT_PUBLIC_PRIVACY_URL
+              value: "/privacy"
+            - name: NEXT_PUBLIC_DARK_MODE
+              value: "false"
+            - name: FEATURE_TEAM_SSO
+              value: "false"
+            - name: FEATURE_TEAM_DSYNC
+              value: "false"
+            - name: FEATURE_TEAM_AUDIT_LOG
+              value: "false"
+            - name: FEATURE_TEAM_WEBHOOK
+              value: "false"
+            - name: FEATURE_TEAM_API_KEY
+              value: "false"
+            - name: FEATURE_TEAM_DELETION
+              value: "true"
+            - name: FEATURE_TEAM_PAYMENTS
+              value: "true"
+            - name: NEXTAUTH_SESSION_STRATEGY
+              value: "jwt"
+            - name: MAX_LOGIN_ATTEMPTS
+              value: "5"
+            - name: FEATURE_TEAM_API_KEY
+              value: "false"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: store
+  namespace: "{{ .Release.Namespace }}"
+  labels:
+    app: store
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+    - name: http
+      port: 4002
+  selector:
+    app.kubernetes.io/name: store
+    app-type: store
