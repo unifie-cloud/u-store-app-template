@@ -325,7 +325,7 @@ rules:
     varValueType: string
     varValueSrcType: src_deployment_var
     hardcodedDefaultValue: ''
-    refToSpecVar: .deployment.domain
+    refToSpecVar: deployment.domain
     UIVarTitle: store.APP_DOMAIN
     varApplyMethod: method_replace
     UIVarValidationRules: []
