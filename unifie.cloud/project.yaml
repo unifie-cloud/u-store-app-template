@@ -1,11 +1,11 @@
 showVerionsTab: true
 showEnvVarsTab: true
 allowAutoApplyLimits: false
-name: undefined
-title: Unifie-store
+name: U-store
+title: U-store
 logo: null
-tags: ''
-description: Unifie-store
+tags: ""
+description: U-store
 oneDeploymentPerCluster: false
 notAllowRemoveNamespace: false
 autoAddEnvVarsToDeployments: true
