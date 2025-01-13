@@ -1,67 +1,378 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: "{{ .Release.Namespace }}"
-  name: ustore-configs
-data:
-  schema.json: {{ .Values.store.schema }}
-
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  namespace: "{{ .Release.Namespace }}"
-  name: store
-  labels:
-    app-type: store
-    app.kubernetes.io/name: store
-spec:
-  selector:
-    matchLabels:
-      app-type: store
-      app.kubernetes.io/name: store
-  template:
-    metadata:
-      labels:
-        app-type: store
-        app.kubernetes.io/name: store
-    spec:
-      volumes:
-        - name: ustore-configs
-          configMap:
-            name: ustore-configs
-      containers:
-        - name: back
-          image: "{{ .Values.store.image }}"
-          volumeMounts:
-            - name: ustore-configs
-              mountPath: /unifie-config-maps
-          resources:
-            requests:
-              memory: 100Mi
-              cpu: 50m
-          ports:
-            - containerPort: 4002
-          env:
-            {{- range $k, $v := .Values.env }}
-            - name: {{ $k }}
-              value: {{ $v }}
-            {{- end }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: store
-  namespace: "{{ .Release.Namespace }}"
-  labels:
-    app: store
-spec:
-  type: ClusterIP
-  sessionAffinity: None
-  ports:
-    - name: http
-      port: 4002
-  selector:
-    app.kubernetes.io/name: store
-    app-type: store
+name: store
+uiType: helm
+helmRepositoryName: unifie-store
+helmRepositoryChartName: unifie-store
+rules:
+  - varName: env
+    varValueType: object
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: >-
+      {"NEXTAUTH_URL":"http://localhost:4002","NEXTAUTH_SECRET":"rJ33KHloQrxJ8oG82CheIKP76TPHqgulUaGq8fG0Twc=","SMTP_HOST":null,"SMTP_PORT":null,"SMTP_USER":null,"SMTP_PASSWORD":null,"SMTP_FROM":null,"DATABASE_URL":"postgresql://<USER-HERE>:<PASSWORD-HERE>@localhost:5432/<DATABASE
+      NAME
+      HERE>","APP_URL":"http://localhost:4002","SVIX_URL":"https://api.eu.svix.com","SVIX_API_KEY":null,"GITHUB_CLIENT_ID":null,"GITHUB_CLIENT_SECRET":null,"GOOGLE_CLIENT_ID":null,"GOOGLE_CLIENT_SECRET":null,"RETRACED_URL":null,"RETRACED_API_KEY":null,"RETRACED_PROJECT_ID":null,"HIDE_LANDING_PAGE":true,"GROUP_PREFIX":"unifie-","CONFIRM_EMAIL":false,"DISABLE_NON_BUSINESS_EMAIL_SIGNUP":false,"NEXT_PUBLIC_MIXPANEL_TOKEN":null,"AUTH_PROVIDERS":null,"OTEL_EXPORTER_OTLP_METRICS_ENDPOINT":null,"OTEL_EXPORTER_OTLP_METRICS_HEADERS":null,"OTEL_PREFIX":"unifie.saas","NEXT_PUBLIC_TERMS_URL":"/terms","NEXT_PUBLIC_PRIVACY_URL":"/privacy","NEXT_PUBLIC_DARK_MODE":false,"FEATURE_TEAM_SSO":false,"FEATURE_TEAM_DSYNC":false,"FEATURE_TEAM_AUDIT_LOG":false,"FEATURE_TEAM_WEBHOOK":false,"FEATURE_TEAM_API_KEY":false,"FEATURE_TEAM_DELETION":false,"FEATURE_TEAM_PAYMENTS":true,"RECAPTCHA_SITE_KEY":null,"RECAPTCHA_SECRET_KEY":null,"NEXTAUTH_SESSION_STRATEGY":"jwt","NEXT_PUBLIC_SENTRY_DSN":null,"NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE":0,"SENTRY_RELEASE":null,"SENTRY_ENVIRONMENT":null,"SENTRY_URL":null,"SENTRY_ORG":null,"SENTRY_PROJECT":null,"SENTRY_AUTH_TOKEN":null,"MAX_LOGIN_ATTEMPTS":5,"SLACK_WEBHOOK_URL":null,"STRIPE_SECRET_KEY":null,"STRIPE_WEBHOOK_SECRET":null,"NEXT_PUBLIC_SUPPORT_URL":null,"UNIFIE_API_URL":null,"UNIFIE_API_KEY":null,"UNIFIE_DEFAULT_TEMPLATE_ID":null,"UNIFIE_PROJECT_NAME":"Unifie
+      store","NEXT_PUBLIC_UNIFIE_SHOW_PODS":true,"NEXT_PUBLIC_UNIFIE_SHOW_ARABILITY":true,"NEXT_PUBLIC_UNIFIE_SHOW_METRICS":true,"NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED":true,"BRANDING_PROJECT_NAME":"Unifie-store"}
+    refToSpecVar: ""
+    UIVarTitle: env
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.APP_URL
+    varValueType: string
+    varValueSrcType: src_deployment_var
+    hardcodedDefaultValue: ""
+    refToSpecVar: deployment.domain
+    UIVarTitle: env.APP_URL
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.BRANDING_PROJECT_NAME
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: Unifie-store
+    refToSpecVar: ""
+    UIVarTitle: Branding project name
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.CONFIRM_EMAIL
+    varValueType: boolean
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: "false"
+    refToSpecVar: ""
+    UIVarTitle: CONFIRM_EMAIL
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: boolean
+  - varName: env.DATABASE_URL
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: >-
+      postgresql://<USER-HERE>:<PASSWORD-HERE>@localhost:5432/<DATABASE NAME
+      HERE>
+    refToSpecVar: ""
+    UIVarTitle: Database url
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: password
+  - varName: env.DISABLE_NON_BUSINESS_EMAIL_SIGNUP
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: "false"
+    refToSpecVar: ""
+    UIVarTitle: DISABLE_NON_BUSINESS_EMAIL_SIGNUP
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: boolean
+  - varName: env.FEATURE_TEAM_API_KEY
+    varValueType: boolean
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: "false"
+    refToSpecVar: ""
+    UIVarTitle: env.FEATURE_TEAM_API_KEY
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.FEATURE_TEAM_AUDIT_LOG
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: "false"
+    refToSpecVar: ""
+    UIVarTitle: FEATURE_TEAM_AUDIT_LOG
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: boolean
+  - varName: env.FEATURE_TEAM_DELETION
+    varValueType: boolean
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: "false"
+    refToSpecVar: ""
+    UIVarTitle: env.FEATURE_TEAM_DELETION
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.FEATURE_TEAM_DSYNC
+    varValueType: boolean
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: "false"
+    refToSpecVar: ""
+    UIVarTitle: env.FEATURE_TEAM_DSYNC
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.FEATURE_TEAM_PAYMENTS
+    varValueType: boolean
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: "true"
+    refToSpecVar: ""
+    UIVarTitle: FEATURE_TEAM_PAYMENTS
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.FEATURE_TEAM_SSO
+    varValueType: boolean
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: "false"
+    refToSpecVar: ""
+    UIVarTitle: env.FEATURE_TEAM_SSO
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.FEATURE_TEAM_WEBHOOK
+    varValueType: boolean
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: "false"
+    refToSpecVar: ""
+    UIVarTitle: env.FEATURE_TEAM_WEBHOOK
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.GROUP_PREFIX
+    varValueType: string
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: unifie-
+    refToSpecVar: ""
+    UIVarTitle: env.GROUP_PREFIX
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.HIDE_LANDING_PAGE
+    varValueType: boolean
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: "true"
+    refToSpecVar: ""
+    UIVarTitle: env.HIDE_LANDING_PAGE
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.MAX_LOGIN_ATTEMPTS
+    varValueType: number
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: "5"
+    refToSpecVar: ""
+    UIVarTitle: env.MAX_LOGIN_ATTEMPTS
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.NEXT_PUBLIC_DARK_MODE
+    varValueType: boolean
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: "false"
+    refToSpecVar: ""
+    UIVarTitle: env.NEXT_PUBLIC_DARK_MODE
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.NEXT_PUBLIC_PRIVACY_URL
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: /privacy
+    refToSpecVar: ""
+    UIVarTitle: NEXT_PUBLIC_PRIVACY_URL
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE
+    varValueType: number
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: "0"
+    refToSpecVar: ""
+    UIVarTitle: env.NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.NEXT_PUBLIC_TERMS_URL
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: /terms
+    refToSpecVar: ""
+    UIVarTitle: NEXT_PUBLIC_TERMS_URL
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.NEXT_PUBLIC_UNIFIE_SHOW_ARABILITY
+    varValueType: boolean
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: "true"
+    refToSpecVar: ""
+    UIVarTitle: env.NEXT_PUBLIC_UNIFIE_SHOW_ARABILITY
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.NEXT_PUBLIC_UNIFIE_SHOW_AVAILABILITY
+    varValueType: boolean
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: "true"
+    refToSpecVar: ""
+    UIVarTitle: NEXT_PUBLIC_UNIFIE_SHOW_AVAILABILITY
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.NEXT_PUBLIC_UNIFIE_SHOW_METRICS
+    varValueType: boolean
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: "true"
+    refToSpecVar: ""
+    UIVarTitle: NEXT_PUBLIC_UNIFIE_SHOW_METRICS
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.NEXT_PUBLIC_UNIFIE_SHOW_PODS
+    varValueType: boolean
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: "true"
+    refToSpecVar: ""
+    UIVarTitle: NEXT_PUBLIC_UNIFIE_SHOW_PODS
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED
+    varValueType: boolean
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: "true"
+    refToSpecVar: ""
+    UIVarTitle: NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.NEXTAUTH_SECRET
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: rJ33KHloQrxJ8oG82CheIKP76TPHqgulUaGq8fG0Twc=
+    refToSpecVar: ""
+    UIVarTitle: >-
+      NEXTAUTH_SECRET (You can use openssl to generate a random 32 character
+      key: openssl rand -base64 32)
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: password
+  - varName: env.NEXTAUTH_SESSION_STRATEGY
+    varValueType: string
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: jwt
+    refToSpecVar: ""
+    UIVarTitle: env.NEXTAUTH_SESSION_STRATEGY
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.NEXTAUTH_URL
+    varValueType: string
+    varValueSrcType: src_deployment_var
+    hardcodedDefaultValue: ""
+    refToSpecVar: deployment.domain
+    UIVarTitle: env.NEXTAUTH_URL
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.OTEL_PREFIX
+    varValueType: string
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: unifie.saas
+    refToSpecVar: ""
+    UIVarTitle: env.OTEL_PREFIX
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.SVIX_URL
+    varValueType: string
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: https://api.eu.svix.com
+    refToSpecVar: ""
+    UIVarTitle: env.SVIX_URL
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.UNIFIE_API_KEY
+    varApplyMethod: method_replace
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: ""
+    refToSpecVar: ""
+    UIVarTitle: UNIFIE_API_KEY
+    UIVarInputType: password
+  - varName: env.UNIFIE_API_URL
+    varApplyMethod: method_replace
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: ""
+    refToSpecVar: ""
+    UIVarTitle: UNIFIE_API_URL
+    UIVarInputType: text
+  - varName: env.UNIFIE_DEFAULT_TEMPLATE_ID
+    varApplyMethod: method_replace
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: ""
+    refToSpecVar: ""
+    UIVarTitle: UNIFIE_DEFAULT_TEMPLATE_ID
+    UIVarInputType: number
+  - varName: env.UNIFIE_PROJECT_NAME
+    varValueType: string
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: Unifie store
+    refToSpecVar: ""
+    UIVarTitle: env.UNIFIE_PROJECT_NAME
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: store
+    varValueType: object
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: '{"image":"public.ecr.aws/g4a0y2u8/unifie-store:staging-19925"}'
+    refToSpecVar: ""
+    UIVarTitle: store
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: store.image
+    varValueType: string
+    varValueSrcType: src_deployment_var
+    hardcodedDefaultValue: ""
+    refToSpecVar: image.unifie-store
+    UIVarTitle: store.image
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: store.schema
+    varValueType: object
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: >-
+      {     "schema": {         "properties": [             {                
+      "type": "boolean",                 "label":
+      "unifie-app-enabled",                 "name": "isEnabled"            
+      }         ]     } }
+    refToSpecVar: image.unifie-store
+    UIVarTitle: Store deployment schema
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: json
+  - varName: env.STRIPE_SECRET_KEY
+    varApplyMethod: method_replace
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: ""
+    refToSpecVar: ""
+    UIVarTitle: STRIPE_SECRET_KEY
+    UIVarInputType: password
+  - varName: env.STRIPE_WEBHOOK_SECRET
+    varApplyMethod: method_replace
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: ""
+    refToSpecVar: ""
+    UIVarTitle: STRIPE_WEBHOOK_SECRET
+    UIVarInputType: password
+routes:
+  - host: "{{ .deployment.domain }}"
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: store
+              port:
+                number: 4002
+monitoring:
+  - host: "{{ .deployment.domain }}"
+    path: /
+    timeout: 30000

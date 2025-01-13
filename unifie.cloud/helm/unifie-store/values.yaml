@@ -12,7 +12,7 @@ store:
             "type": "boolean",
             "label": "unifie-app-enabled",
             "name": "isEnabled"
-          },
+          }
         ]
       }
     }
@@ -132,10 +132,9 @@ env:
   UNIFIE_API_URL:
   UNIFIE_API_KEY:
   UNIFIE_DEFAULT_TEMPLATE_ID:
-  UNIFIE_PROJECT_NAME: Unifie store
 
   NEXT_PUBLIC_UNIFIE_SHOW_PODS: true
-  NEXT_PUBLIC_UNIFIE_SHOW_ARABILITY: true
+  NEXT_PUBLIC_UNIFIE_SHOW_AVAILABILITY: true
   NEXT_PUBLIC_UNIFIE_SHOW_METRICS: true
   NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED: true
   BRANDING_PROJECT_NAME: Unifie-store
