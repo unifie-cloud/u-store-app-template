@@ -3,7 +3,7 @@ showEnvVarsTab: true
 allowAutoApplyLimits: false
 name: U-store
 title: U-store
-logo: null
+logo: https://localhost.unifie.cloud/branding/headerLogo.svg
 tags: ""
 description: U-store
 oneDeploymentPerCluster: false

@@ -349,7 +349,7 @@ rules:
     UIVarValidationRules: []
     UIVarInputType: string
   - varName: store.schema
-    varValueType: object
+    varValueType: string
     varValueSrcType: src_deployment_ui
     hardcodedDefaultValue: >-
       {     "schema": {         "properties": [             {                

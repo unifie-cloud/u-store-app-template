@@ -5,7 +5,7 @@ metadata:
   namespace: "{{ .Release.Namespace }}"
   name: ustore-configs
 data:
-  schema.json: {{ .Values.store.schema }}
+  schema.json: {{ .Values.store.schema | toJson }}
 
 ---
 apiVersion: apps/v1
@@ -45,8 +45,10 @@ spec:
             - containerPort: 4002
           env:
             {{- range $k, $v := .Values.env }}
-            - name: {{ $k }}
-              value: {{ $v }}
+              {{- if $v }}
+            - name: "{{ $k }}"
+              value: "{{ $v }}"
+              {{- end -}}
             {{- end }}
 ---
 apiVersion: v1
