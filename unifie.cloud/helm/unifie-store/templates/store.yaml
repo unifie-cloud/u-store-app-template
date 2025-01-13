@@ -5,18 +5,7 @@ metadata:
   namespace: "{{ .Release.Namespace }}"
   name: ustore-configs
 data:
-  schema.json: |
-    {
-      "schema": {
-        "properties": [
-          {
-            "type": "boolean",
-            "label": "unifie-app-enabled",
-            "name": "isEnabled"
-          },
-        ]
-      }
-    }
+  schema.json: {{ .Values.store.schema }}
 
 ---
 apiVersion: apps/v1
@@ -55,40 +44,10 @@ spec:
           ports:
             - containerPort: 4002
           env:
-            - name: GROUP_PREFIX
-              value: "unifie-"
-            - name: HIDE_LANDING_PAGE
-              value: "true"
-            - name: CONFIRM_EMAIL
-              value: "false"
-            - name: DISABLE_NON_BUSINESS_EMAIL_SIGNUP
-              value: "false"
-            - name: NEXT_PUBLIC_TERMS_URL
-              value: "/terms"
-            - name: NEXT_PUBLIC_PRIVACY_URL
-              value: "/privacy"
-            - name: NEXT_PUBLIC_DARK_MODE
-              value: "false"
-            - name: FEATURE_TEAM_SSO
-              value: "false"
-            - name: FEATURE_TEAM_DSYNC
-              value: "false"
-            - name: FEATURE_TEAM_AUDIT_LOG
-              value: "false"
-            - name: FEATURE_TEAM_WEBHOOK
-              value: "false"
-            - name: FEATURE_TEAM_API_KEY
-              value: "false"
-            - name: FEATURE_TEAM_DELETION
-              value: "true"
-            - name: FEATURE_TEAM_PAYMENTS
-              value: "true"
-            - name: NEXTAUTH_SESSION_STRATEGY
-              value: "jwt"
-            - name: MAX_LOGIN_ATTEMPTS
-              value: "5"
-            - name: FEATURE_TEAM_API_KEY
-              value: "false"
+            {{- range $k, $v := .Values.env }}
+            - name: {{ $k }}
+              value: {{ $v }}
+            {{- end }}
 ---
 apiVersion: v1
 kind: Service
