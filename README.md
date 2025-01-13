@@ -1,6 +1,6 @@
-# Unifie Store
+# U-Store
 
-[Deploy template for u-store](https://github.com/unifie-cloud/u-store)
+[Deploy template for u-store](https://github.com/unifie-cloud/u-store) - Template for your own SaaS cloud store. Allow tp build cloud SaaS platform from any software to drive more usage, unlock more revenue and grow faster.
 
 # Configuration Values for Unifie Helm Chart
 
