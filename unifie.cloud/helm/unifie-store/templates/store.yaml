@@ -50,6 +50,10 @@ spec:
               value: "{{ $v }}"
               {{- end -}}
             {{- end }}
+            - name: "APP_URL"
+              value: "{{ .Values.APP_PROTOCOL}}://{{ .Values.APP_DOMAIN}}"
+            - name: "NEXTAUTH_URL"
+              value: "{{ .Values.APP_PROTOCOL}}://{{ .Values.APP_DOMAIN}}"
 ---
 apiVersion: v1
 kind: Service

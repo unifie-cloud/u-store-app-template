@@ -4,6 +4,8 @@
 
 store:
   image: "public.ecr.aws/g4a0y2u8/unifie-store:staging-19925"
+  APP_DOMAIN:
+  APP_PROTOCOL: https
   schema: |
     {
       "schema": {
@@ -18,7 +20,6 @@ store:
     }
 
 env:
-  NEXTAUTH_URL: http://localhost:4002
   # You can use openssl to generate a random 32 character key: openssl rand -base64 32
   NEXTAUTH_SECRET: rJ33KHloQrxJ8oG82CheIKP76TPHqgulUaGq8fG0Twc=
 
@@ -31,8 +32,6 @@ env:
 
   # If you are using Docker, you can retrieve the values from: docker-compose.yml
   DATABASE_URL: postgresql://<USER-HERE>:<PASSWORD-HERE>@localhost:5432/<DATABASE NAME HERE>
-
-  APP_URL: http://localhost:4002
 
   SVIX_URL: https://api.eu.svix.com
   SVIX_API_KEY:

@@ -49,7 +49,7 @@ This document describes the configurable values in the `values.yaml` file for th
 - **`NEXT_PUBLIC_PRIVACY_URL`**: URL for privacy policy. Default: `/privacy`.
 - **`NEXT_PUBLIC_DARK_MODE`**: (boolean) Enable dark mode for the UI. Default: `false`.
 - **`NEXT_PUBLIC_SUPPORT_URL`**: URL for customer support.
-- **`BRANDING_PROJECT_NAME`**: Name of the branded project. Default: `Unifie-store`.
+- **`BRANDING_PROJECT_NAME`**: Name of the branded project. Default: `U-store`.
 
 ### Feature Toggles
 
