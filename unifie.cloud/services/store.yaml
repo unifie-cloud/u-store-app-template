@@ -16,15 +16,6 @@ rules:
     varApplyMethod: method_replace
     UIVarValidationRules: []
     UIVarInputType: string
-  - varName: env.APP_URL
-    varValueType: string
-    varValueSrcType: src_deployment_var
-    hardcodedDefaultValue: ''
-    refToSpecVar: deployment.domain
-    UIVarTitle: env.APP_URL
-    varApplyMethod: method_replace
-    UIVarValidationRules: []
-    UIVarInputType: string
   - varName: env.BRANDING_PROJECT_NAME
     varValueType: string
     varValueSrcType: src_deployment_ui
@@ -254,15 +245,6 @@ rules:
     varApplyMethod: method_replace
     UIVarValidationRules: []
     UIVarInputType: string
-  - varName: env.NEXTAUTH_URL
-    varValueType: string
-    varValueSrcType: src_deployment_var
-    hardcodedDefaultValue: ''
-    refToSpecVar: deployment.domain
-    UIVarTitle: env.NEXTAUTH_URL
-    varApplyMethod: method_replace
-    UIVarValidationRules: []
-    UIVarInputType: string
   - varName: env.OTEL_PREFIX
     varValueType: string
     varValueSrcType: src_hardcoded
@@ -336,6 +318,24 @@ rules:
     hardcodedDefaultValue: '{"image":"public.ecr.aws/g4a0y2u8/unifie-store:staging-19925"}'
     refToSpecVar: ''
     UIVarTitle: store
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: store.APP_DOMAIN
+    varValueType: string
+    varValueSrcType: src_deployment_var
+    hardcodedDefaultValue: ''
+    refToSpecVar: .deployment.domain
+    UIVarTitle: store.APP_DOMAIN
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: store.APP_PROTOCOL
+    varValueType: string
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: https
+    refToSpecVar: ''
+    UIVarTitle: store.APP_PROTOCOL
     varApplyMethod: method_replace
     UIVarValidationRules: []
     UIVarInputType: string
