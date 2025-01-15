@@ -377,4 +377,4 @@ monitoring:
     path: /
     timeout: 30000
 helmRepositoryURL: https://unifie-cloud.github.io/charts/helm
-helmRepositoryVersion: '1.1'
+helmRepositoryVersion: '1.2'
