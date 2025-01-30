@@ -10,7 +10,7 @@ rules:
       {"NEXTAUTH_URL":"http://localhost:4002","NEXTAUTH_SECRET":"rJ33KHloQrxJ8oG82CheIKP76TPHqgulUaGq8fG0Twc=","SMTP_HOST":null,"SMTP_PORT":null,"SMTP_USER":null,"SMTP_PASSWORD":null,"SMTP_FROM":null,"DATABASE_URL":"postgresql://<USER-HERE>:<PASSWORD-HERE>@localhost:5432/<DATABASE
       NAME
       HERE>","APP_URL":"http://localhost:4002","SVIX_URL":"https://api.eu.svix.com","SVIX_API_KEY":null,"GITHUB_CLIENT_ID":null,"GITHUB_CLIENT_SECRET":null,"GOOGLE_CLIENT_ID":null,"GOOGLE_CLIENT_SECRET":null,"RETRACED_URL":null,"RETRACED_API_KEY":null,"RETRACED_PROJECT_ID":null,"HIDE_LANDING_PAGE":true,"GROUP_PREFIX":"unifie-","CONFIRM_EMAIL":false,"DISABLE_NON_BUSINESS_EMAIL_SIGNUP":false,"NEXT_PUBLIC_MIXPANEL_TOKEN":null,"AUTH_PROVIDERS":null,"OTEL_EXPORTER_OTLP_METRICS_ENDPOINT":null,"OTEL_EXPORTER_OTLP_METRICS_HEADERS":null,"OTEL_PREFIX":"unifie.saas","NEXT_PUBLIC_TERMS_URL":"/terms","NEXT_PUBLIC_PRIVACY_URL":"/privacy","NEXT_PUBLIC_DARK_MODE":false,"FEATURE_TEAM_SSO":false,"FEATURE_TEAM_DSYNC":false,"FEATURE_TEAM_AUDIT_LOG":false,"FEATURE_TEAM_WEBHOOK":false,"FEATURE_TEAM_API_KEY":false,"FEATURE_TEAM_DELETION":false,"FEATURE_TEAM_PAYMENTS":true,"RECAPTCHA_SITE_KEY":null,"RECAPTCHA_SECRET_KEY":null,"NEXTAUTH_SESSION_STRATEGY":"jwt","NEXT_PUBLIC_SENTRY_DSN":null,"NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE":0,"SENTRY_RELEASE":null,"SENTRY_ENVIRONMENT":null,"SENTRY_URL":null,"SENTRY_ORG":null,"SENTRY_PROJECT":null,"SENTRY_AUTH_TOKEN":null,"MAX_LOGIN_ATTEMPTS":5,"SLACK_WEBHOOK_URL":null,"STRIPE_SECRET_KEY":null,"STRIPE_WEBHOOK_SECRET":null,"NEXT_PUBLIC_SUPPORT_URL":null,"UNIFIE_API_URL":null,"UNIFIE_API_KEY":null,"UNIFIE_DEFAULT_TEMPLATE_ID":null,"UNIFIE_PROJECT_NAME":"Unifie
-      store","NEXT_PUBLIC_UNIFIE_SHOW_PODS":true,"NEXT_PUBLIC_UNIFIE_SHOW_ARABILITY":true,"NEXT_PUBLIC_UNIFIE_SHOW_METRICS":true,"NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED":true,"BRANDING_PROJECT_NAME":"Unifie-store"}
+      store","UNIFIE_SHOW_PODS":true,"UNIFIE_SHOW_AVAILABILITY":true,"UNIFIE_SHOW_METRICS":true,"UNIFIE_SUBSCRIPTION_REQUIRED":true,"BRANDING_PROJECT_NAME":"Unifie-store"}
     refToSpecVar: ''
     UIVarTitle: env
     varApplyMethod: method_replace
@@ -180,48 +180,48 @@ rules:
     varApplyMethod: method_replace
     UIVarValidationRules: []
     UIVarInputType: string
-  - varName: env.NEXT_PUBLIC_UNIFIE_SHOW_ARABILITY
+  - varName: env.UNIFIE_SHOW_AVAILABILITY
     varValueType: boolean
     varValueSrcType: src_hardcoded
     hardcodedDefaultValue: 'true'
     refToSpecVar: ''
-    UIVarTitle: env.NEXT_PUBLIC_UNIFIE_SHOW_ARABILITY
+    UIVarTitle: env.UNIFIE_SHOW_AVAILABILITY
     varApplyMethod: method_replace
     UIVarValidationRules: []
     UIVarInputType: string
-  - varName: env.NEXT_PUBLIC_UNIFIE_SHOW_AVAILABILITY
+  - varName: env.UNIFIE_SHOW_AVAILABILITY
     varValueType: string
     varValueSrcType: src_deployment_ui
     hardcodedDefaultValue: 'true'
     refToSpecVar: ''
-    UIVarTitle: NEXT_PUBLIC_UNIFIE_SHOW_AVAILABILITY
+    UIVarTitle: UNIFIE_SHOW_AVAILABILITY
     varApplyMethod: method_replace
     UIVarValidationRules: []
     UIVarInputType: boolean
-  - varName: env.NEXT_PUBLIC_UNIFIE_SHOW_METRICS
+  - varName: env.UNIFIE_SHOW_METRICS
     varValueType: string
     varValueSrcType: src_deployment_ui
     hardcodedDefaultValue: 'true'
     refToSpecVar: ''
-    UIVarTitle: NEXT_PUBLIC_UNIFIE_SHOW_METRICS
+    UIVarTitle: UNIFIE_SHOW_METRICS
     varApplyMethod: method_replace
     UIVarValidationRules: []
     UIVarInputType: boolean
-  - varName: env.NEXT_PUBLIC_UNIFIE_SHOW_PODS
+  - varName: env.UNIFIE_SHOW_PODS
     varValueType: string
     varValueSrcType: src_deployment_ui
     hardcodedDefaultValue: 'true'
     refToSpecVar: ''
-    UIVarTitle: NEXT_PUBLIC_UNIFIE_SHOW_PODS
+    UIVarTitle: UNIFIE_SHOW_PODS
     varApplyMethod: method_replace
     UIVarValidationRules: []
     UIVarInputType: boolean
-  - varName: env.NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED
+  - varName: env.UNIFIE_SUBSCRIPTION_REQUIRED
     varValueType: string
     varValueSrcType: src_deployment_ui
     hardcodedDefaultValue: 'true'
     refToSpecVar: ''
-    UIVarTitle: NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED
+    UIVarTitle: UNIFIE_SUBSCRIPTION_REQUIRED
     varApplyMethod: method_replace
     UIVarValidationRules: []
     UIVarInputType: boolean
