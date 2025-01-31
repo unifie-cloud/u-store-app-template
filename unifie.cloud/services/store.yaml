@@ -180,51 +180,6 @@ rules:
     varApplyMethod: method_replace
     UIVarValidationRules: []
     UIVarInputType: string
-  - varName: env.UNIFIE_SHOW_AVAILABILITY
-    varValueType: boolean
-    varValueSrcType: src_hardcoded
-    hardcodedDefaultValue: 'true'
-    refToSpecVar: ''
-    UIVarTitle: env.UNIFIE_SHOW_AVAILABILITY
-    varApplyMethod: method_replace
-    UIVarValidationRules: []
-    UIVarInputType: string
-  - varName: env.UNIFIE_SHOW_AVAILABILITY
-    varValueType: string
-    varValueSrcType: src_deployment_ui
-    hardcodedDefaultValue: 'true'
-    refToSpecVar: ''
-    UIVarTitle: UNIFIE_SHOW_AVAILABILITY
-    varApplyMethod: method_replace
-    UIVarValidationRules: []
-    UIVarInputType: boolean
-  - varName: env.UNIFIE_SHOW_METRICS
-    varValueType: string
-    varValueSrcType: src_deployment_ui
-    hardcodedDefaultValue: 'true'
-    refToSpecVar: ''
-    UIVarTitle: UNIFIE_SHOW_METRICS
-    varApplyMethod: method_replace
-    UIVarValidationRules: []
-    UIVarInputType: boolean
-  - varName: env.UNIFIE_SHOW_PODS
-    varValueType: string
-    varValueSrcType: src_deployment_ui
-    hardcodedDefaultValue: 'true'
-    refToSpecVar: ''
-    UIVarTitle: UNIFIE_SHOW_PODS
-    varApplyMethod: method_replace
-    UIVarValidationRules: []
-    UIVarInputType: boolean
-  - varName: env.UNIFIE_SUBSCRIPTION_REQUIRED
-    varValueType: string
-    varValueSrcType: src_deployment_ui
-    hardcodedDefaultValue: 'true'
-    refToSpecVar: ''
-    UIVarTitle: UNIFIE_SUBSCRIPTION_REQUIRED
-    varApplyMethod: method_replace
-    UIVarValidationRules: []
-    UIVarInputType: boolean
   - varName: env.NEXTAUTH_SECRET
     varValueType: string
     varValueSrcType: src_deployment_ui
@@ -295,6 +250,15 @@ rules:
     refToSpecVar: ''
     UIVarTitle: UNIFIE_API_URL
     UIVarInputType: text
+  - varName: env.UNIFIE_CLUSTER_WHITELIST
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: ''
+    refToSpecVar: ''
+    UIVarTitle: Cluster whitelist (numbers comma separeted)
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
   - varName: env.UNIFIE_DEFAULT_TEMPLATE_ID
     varApplyMethod: method_replace
     varValueType: string
@@ -312,6 +276,51 @@ rules:
     varApplyMethod: method_replace
     UIVarValidationRules: []
     UIVarInputType: string
+  - varName: env.UNIFIE_SHOW_AVAILABILITY
+    varValueType: boolean
+    varValueSrcType: src_hardcoded
+    hardcodedDefaultValue: 'true'
+    refToSpecVar: ''
+    UIVarTitle: env.UNIFIE_SHOW_AVAILABILITY
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: string
+  - varName: env.UNIFIE_SHOW_AVAILABILITY
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: 'true'
+    refToSpecVar: ''
+    UIVarTitle: UNIFIE_SHOW_AVAILABILITY
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: boolean
+  - varName: env.UNIFIE_SHOW_METRICS
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: 'true'
+    refToSpecVar: ''
+    UIVarTitle: UNIFIE_SHOW_METRICS
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: boolean
+  - varName: env.UNIFIE_SHOW_PODS
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: 'true'
+    refToSpecVar: ''
+    UIVarTitle: UNIFIE_SHOW_PODS
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: boolean
+  - varName: env.UNIFIE_SUBSCRIPTION_REQUIRED
+    varValueType: string
+    varValueSrcType: src_deployment_ui
+    hardcodedDefaultValue: 'true'
+    refToSpecVar: ''
+    UIVarTitle: UNIFIE_SUBSCRIPTION_REQUIRED
+    varApplyMethod: method_replace
+    UIVarValidationRules: []
+    UIVarInputType: boolean
   - varName: store
     varValueType: object
     varValueSrcType: src_hardcoded
