@@ -1,11 +1,35 @@
 showVerionsTab: true
 showEnvVarsTab: true
+useRawYaml: false
 allowAutoApplyLimits: false
 name: U-store
 title: U-store
-logo: https://localhost.unifie.cloud/branding/headerLogo.svg
-tags: ""
-description: U-store
+logo: null
+tags:
+  - ustore
+  - ecommerce
+  - shop
+  - postgresql
+  - Kubernetes
+  - SaaScloud
+  - SaaScloud
+  - personal
+description: >-
+  Build cloud SaaS platform from any software to drive more usage, unlock more
+  revenue and grow faster
+   
+  # 🤩 Community
+
+
+  - [Discussions](https://github.com/unifie-cloud/u-store/discussions)
+  (Discussions)
+
+  - [GitHub Issues](https://github.com/unifie-cloud/u-store/issues)
+  (Contributions, report issues, and product ideas)
+
+  - [Project page](https://github.com/orgs/unifie-cloud/projects/2/views/1)
+
+  - [Contributing
+  guide](https://github.com/unifie-cloud/u-store/blob/main/CONTRIBUTING.md)
 oneDeploymentPerCluster: false
 notAllowRemoveNamespace: false
-autoAddEnvVarsToDeployments: true
