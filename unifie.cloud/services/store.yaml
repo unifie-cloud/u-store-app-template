@@ -383,7 +383,7 @@ routes:
                 number: 4002
 monitoring:
   - host: '{{ .deployment.domain }}'
-    path: /
+    path: /auth/login
     timeout: 30000
 helmRepositoryURL: https://unifie-cloud.github.io/charts/helm
 helmRepositoryVersion: '1.2'
